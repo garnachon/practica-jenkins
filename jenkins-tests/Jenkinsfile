@@ -2,6 +2,7 @@ pipeline {
   agent any
   tools {
     nodejs '20.2.0'
+    
   }
 
   options {
@@ -9,12 +10,13 @@ pipeline {
   }
 
   stages {
-    stage('Revision de archivos') {
+    stage('Preparación del entorno') {
       steps {
+        deleteDir() // Borra el workspace previo
         sh 'ls -la'
       }
     }
-     stage('Install dependencies') {
+    stage('Install dependencies') {
       steps {
         sh 'cd jenkins-tests && npm i'
       }
@@ -22,6 +24,11 @@ pipeline {
     stage('Run tests') {
       steps {
         sh 'cd jenkins-tests && npm t'
+      }
+    }
+    stage('Limpieza del entorno') {
+      steps {
+        deleteDir() // Borra el workspace al finalizar
       }
     }
   }
