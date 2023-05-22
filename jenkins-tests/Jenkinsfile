@@ -9,7 +9,12 @@ pipeline {
   }
 
   stages {
-    stage('Install dependencies') {
+    stage('Revision de archivos') {
+      steps {
+        sh 'ls -la'
+      }
+    }
+     stage('Install dependencies') {
       steps {
         sh 'cd jenkins-tests && npm i'
       }
