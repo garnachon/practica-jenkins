@@ -31,6 +31,17 @@ pipeline {
         deleteDir() // Borra el workspace al finalizar
       }
     }
+    stage('Directorio') {
+      steps {
+        pwd() // revisa directorio donde se ejecuta
+      }
+    }
+    stage('Sheel Script') {
+      steps {
+        sh '''touch genero_un_archivo.txt
+        ls -la''' // ejecuto shell script
+      }
+    }
     stage('Mensaje') {
       steps {
         echo 'Pipeline correcto' // echo con un mensaje
