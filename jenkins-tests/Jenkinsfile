@@ -31,5 +31,10 @@ pipeline {
         deleteDir() // Borra el workspace al finalizar
       }
     }
+    stage('Mensaje') {
+      steps {
+        echo 'Pipeline correcto' // echo con un mensaje
+      }
+    }
   }
 }
