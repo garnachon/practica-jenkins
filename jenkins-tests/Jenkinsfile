@@ -2,7 +2,6 @@ pipeline {
   agent any
   tools {
     nodejs '20.2.0'
-    
   }
 
   options {
@@ -10,33 +9,42 @@ pipeline {
   }
 
   stages {
-    //stage('Preparación del entorno') {
-    //  steps {
-    //    deleteDir() // Borra el workspace previo
-    //    sh 'ls -la'
-    //  }
-    //}
+    stage('Preparación del entorno') {
+      steps {
+        deleteDir() // Borra el workspace previo
+        sh 'ls -la'
+      }
+    }
+
     stage('Install dependencies') {
       steps {
-        sh 'cd jenkins-tests && npm i'
+        node('build') { // Etiqueta 'build' para ejecutar en el nodo esclavo
+          sh 'cd jenkins-tests && npm i'
+        }
       }
     }
+
     stage('Run tests') {
       steps {
-        sh 'cd jenkins-tests && npm t'
+        node('build') { // Etiqueta 'build' para ejecutar en el nodo esclavo
+          sh 'cd jenkins-tests && npm t'
+        }
       }
     }
+
     stage('Limpieza del entorno') {
       steps {
         deleteDir() // Borra el workspace al finalizar
       }
     }
+
     stage('Sheel Script') {
       steps {
         sh '''touch genero_un_archivo.txt
         ls -la''' // ejecuto shell script
       }
     }
+
     stage('Mensaje') {
       steps {
         echo 'Pipeline correcto' // echo con un mensaje
