@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent { label "build"}
   tools {
     nodejs '20.2.0'
     
