@@ -33,7 +33,9 @@ pipeline {
     }
     stage('Directorio') {
       steps {
-        pwd() // revisa directorio donde se ejecuta
+        catchError(message: 'PruebaCatchError') {
+          pwd()
+        }
       }
     }
     stage('Sheel Script') {
