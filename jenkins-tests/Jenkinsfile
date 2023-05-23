@@ -31,13 +31,6 @@ pipeline {
         deleteDir() // Borra el workspace al finalizar
       }
     }
-    stage('Directorio') {
-      steps {
-        catchError(message: 'PruebaCatchError') {
-          pwd(
-        }
-      }
-    }
     stage('Sheel Script') {
       steps {
         sh '''touch genero_un_archivo.txt
