@@ -34,7 +34,7 @@ pipeline {
     stage('Directorio') {
       steps {
         catchError(message: 'PruebaCatchError') {
-          pwd()
+          pwd(
         }
       }
     }
